@@ -119,10 +119,10 @@ export const RsvpForm: React.FC<RsvpFormProps> = ({ onSuccess }) => {
             <div className="grid grid-cols-2 gap-3">
               {/* HADIR */}
               <label
-                className={`flex flex-col items-center justify-center p-3 rounded-xs border text-xs font-medium cursor-pointer transition-all select-none min-h-[44px] ${
+                className={`flex flex-col items-center justify-center p-3 rounded-xs border text-xs font-semibold cursor-pointer transition-all select-none min-h-[46px] ${
                   attendance === 'hadir'
-                    ? 'border-gorga bg-gorga/15 text-gorga font-semibold shadow-xs'
-                    : 'border-gold/30 bg-surface-alt text-ink hover:border-gold'
+                    ? 'border-gorga bg-gorga text-white shadow-xs'
+                    : 'border-gold/40 bg-surface-alt text-ink hover:border-gorga hover:text-gorga active:bg-surface-alt/70'
                 }`}
               >
                 <input
@@ -133,15 +133,17 @@ export const RsvpForm: React.FC<RsvpFormProps> = ({ onSuccess }) => {
                   onChange={() => setAttendance('hadir')}
                   className="sr-only"
                 />
-                <span>Pasti Hadir</span>
+                <span className={attendance === 'hadir' ? 'text-white font-semibold' : 'text-ink'}>
+                  Pasti Hadir
+                </span>
               </label>
 
               {/* BERHALANGAN */}
               <label
-                className={`flex flex-col items-center justify-center p-3 rounded-xs border text-xs font-medium cursor-pointer transition-all select-none min-h-[44px] ${
+                className={`flex flex-col items-center justify-center p-3 rounded-xs border text-xs font-semibold cursor-pointer transition-all select-none min-h-[46px] ${
                   attendance === 'berhalangan'
-                    ? 'border-gorga bg-gorga/15 text-gorga font-semibold shadow-xs'
-                    : 'border-gold/30 bg-surface-alt text-ink hover:border-gold'
+                    ? 'border-gorga bg-gorga text-white shadow-xs'
+                    : 'border-gold/40 bg-surface-alt text-ink hover:border-gorga hover:text-gorga active:bg-surface-alt/70'
                 }`}
               >
                 <input
@@ -152,7 +154,9 @@ export const RsvpForm: React.FC<RsvpFormProps> = ({ onSuccess }) => {
                   onChange={() => setAttendance('berhalangan')}
                   className="sr-only"
                 />
-                <span>Berhalangan</span>
+                <span className={attendance === 'berhalangan' ? 'text-white font-semibold' : 'text-ink'}>
+                  Berhalangan
+                </span>
               </label>
             </div>
           </div>
@@ -181,10 +185,12 @@ export const RsvpForm: React.FC<RsvpFormProps> = ({ onSuccess }) => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xs bg-gradient-to-r from-gorga via-gorga-bright to-gorga hover:brightness-110 text-on-night border border-gold active:scale-98 transition-all duration-200 text-sm font-body font-semibold tracking-wider min-h-[44px] cursor-pointer shadow-[0_4px_16px_var(--shadow-btn)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xs bg-gorga bg-gradient-to-r from-gorga via-gorga-bright to-gorga hover:bg-gorga-bright active:bg-gorga text-white border border-gold active:scale-98 transition-all duration-200 text-sm font-body font-semibold tracking-wider min-h-[46px] cursor-pointer shadow-[0_4px_16px_var(--shadow-btn)] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold disabled:opacity-50"
             >
-              <Send className="w-4 h-4 stroke-[1.5]" />
-              <span>{isSubmitting ? 'Mengirim Konfirmasi...' : 'Kirim Konfirmasi & Doa Restu'}</span>
+              <Send className="w-4 h-4 stroke-[1.75] text-white shrink-0" />
+              <span className="text-white font-semibold">
+                {isSubmitting ? 'Mengirim Konfirmasi...' : 'Kirim Konfirmasi & Doa Restu'}
+              </span>
             </button>
           </div>
         </div>

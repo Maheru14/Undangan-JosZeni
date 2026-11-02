@@ -136,11 +136,11 @@ export const GuestMoments: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setIsModalOpen(true)}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xs bg-gradient-to-r from-gorga via-gorga-bright to-gorga hover:brightness-110 text-on-night border border-gold active:scale-98 transition-all duration-200 text-xs sm:text-sm font-body font-semibold tracking-wider cursor-pointer shadow-[0_4px_16px_var(--shadow-btn)]"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xs bg-gorga bg-gradient-to-r from-gorga via-gorga-bright to-gorga hover:bg-gorga-bright active:bg-gorga text-white border border-gold active:scale-98 transition-all duration-200 text-xs sm:text-sm font-body font-semibold tracking-wider cursor-pointer shadow-[0_4px_16px_var(--shadow-btn)] hover:shadow-lg"
               >
-                <Camera className="w-4 h-4 stroke-[1.75]" />
-                <span>Bagikan Foto Hari-H</span>
-                <Plus className="w-3.5 h-3.5 stroke-[2]" />
+                <Camera className="w-4 h-4 stroke-[1.75] text-white" />
+                <span className="text-white font-semibold">Bagikan Foto Hari-H</span>
+                <Plus className="w-3.5 h-3.5 stroke-[2] text-white" />
               </button>
             ) : (
               <div className="flex flex-col items-center gap-2">
@@ -165,7 +165,7 @@ export const GuestMoments: React.FC = () => {
           <Reveal direction="up" distance={30}>
             <div className="relative p-8 rounded-xs bg-surface border border-gold/40 shadow-sm max-w-md mx-auto text-center overflow-hidden">
               <CornerOrnament size={20} opacity={0.5} variant="gorga" />
-              <div className="w-12 h-12 rounded-full bg-gorga/10 text-gorga mx-auto flex items-center justify-center mb-3">
+              <div className="w-12 h-12 rounded-full bg-surface-alt text-gorga border border-gold/40 mx-auto flex items-center justify-center mb-3 shadow-xs">
                 <Camera className="w-6 h-6 stroke-[1.5]" />
               </div>
               <h4 className="font-display text-base font-semibold text-ink">
@@ -180,7 +180,7 @@ export const GuestMoments: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(true)}
-                  className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 rounded-xs border border-gold text-gorga bg-[#F4EEE6] hover:bg-gorga hover:text-white transition-colors text-xs font-semibold cursor-pointer"
+                  className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 rounded-xs border border-gold text-gorga bg-surface-alt hover:bg-gorga hover:text-white active:bg-gorga active:text-white transition-colors text-xs font-semibold cursor-pointer"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   <span>Unggah Foto Pertama</span>

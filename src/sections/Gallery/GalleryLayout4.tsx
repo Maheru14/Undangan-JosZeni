@@ -311,7 +311,7 @@ export const GalleryLayout4: React.FC<GalleryLayout4Props> = ({
             type="button"
             onClick={handlePrev}
             aria-label="Foto sebelumnya"
-            className="w-10 h-10 rounded-full bg-surface/90 hover:bg-gorga text-ink hover:text-surface border border-gold/40 shadow-xs flex items-center justify-center transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gorga active:scale-95"
+            className="w-10 h-10 rounded-full bg-surface/90 text-ink border border-gold/40 shadow-xs flex items-center justify-center transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gorga hover:bg-gorga hover:text-white active:bg-gorga active:text-white active:scale-95"
           >
             <ChevronLeft className="w-5 h-5 stroke-[1.75]" />
           </button>
@@ -340,7 +340,7 @@ export const GalleryLayout4: React.FC<GalleryLayout4Props> = ({
             type="button"
             onClick={handleNext}
             aria-label="Foto selanjutnya"
-            className="w-10 h-10 rounded-full bg-surface/90 hover:bg-gorga text-ink hover:text-surface border border-gold/40 shadow-xs flex items-center justify-center transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gorga active:scale-95"
+            className="w-10 h-10 rounded-full bg-surface/90 text-ink border border-gold/40 shadow-xs flex items-center justify-center transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gorga hover:bg-gorga hover:text-white active:bg-gorga active:text-white active:scale-95"
           >
             <ChevronRight className="w-5 h-5 stroke-[1.75]" />
           </button>

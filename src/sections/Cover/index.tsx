@@ -222,10 +222,10 @@ export const Cover: React.FC = () => {
             type="button"
             onClick={handleOpenInvitation}
             disabled={isOpening}
-            className="group relative inline-flex items-center justify-center gap-2 px-7 sm:px-9 py-2.5 sm:py-3 rounded-full text-xs font-body font-semibold tracking-[0.18em] uppercase text-on-night bg-gradient-to-r from-gorga via-gorga-bright to-gorga hover:brightness-110 active:scale-98 transition-all duration-300 border border-gold shadow-[0_4px_20px_var(--shadow-btn)] hover:shadow-[0_6px_28px_var(--shadow-btn)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="group relative inline-flex items-center justify-center gap-2 px-7 sm:px-9 py-2.5 sm:py-3 rounded-full text-xs font-body font-semibold tracking-[0.18em] uppercase text-white bg-gorga bg-gradient-to-r from-gorga via-gorga-bright to-gorga hover:bg-gorga-bright active:bg-gorga active:scale-98 transition-all duration-300 border border-gold shadow-[0_4px_20px_var(--shadow-btn)] hover:shadow-[0_6px_28px_var(--shadow-btn)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
           >
-            <MailOpen className="w-3.5 h-3.5 text-on-night transition-transform duration-300 group-hover:scale-110" />
-            <span>Buka Undangan</span>
+            <MailOpen className="w-3.5 h-3.5 text-white transition-transform duration-300 group-hover:scale-110" />
+            <span className="text-white">Buka Undangan</span>
           </button>
         </div>
       </div>

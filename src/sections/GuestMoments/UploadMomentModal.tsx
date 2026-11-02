@@ -130,14 +130,14 @@ export const UploadMomentModal: React.FC<UploadMomentModalProps> = ({
           }}
           disabled={isUploading}
           aria-label="Tutup form upload"
-          className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-surface-alt text-ink hover:text-gorga hover:bg-gorga/10 flex items-center justify-center transition-colors cursor-pointer"
+          className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-surface-alt text-ink hover:text-gorga hover:bg-surface-alt/70 flex items-center justify-center transition-colors cursor-pointer"
         >
           <X className="w-4 h-4 stroke-[2]" />
         </button>
 
         <div className="relative z-10">
           <div className="flex items-center gap-2 mb-1">
-            <span className="p-1.5 rounded-full bg-gorga/10 text-gorga">
+            <span className="p-1.5 rounded-full bg-surface-alt text-gorga border border-gold/30">
               <Camera className="w-4 h-4 stroke-[1.75]" />
             </span>
             <h3 id="upload-modal-title" className="font-display text-xl text-ink font-semibold tracking-wide">
@@ -227,7 +227,7 @@ export const UploadMomentModal: React.FC<UploadMomentModalProps> = ({
                   onClick={() => fileInputRef.current?.click()}
                   className="w-full aspect-4/3 rounded-xs border-2 border-dashed border-gold/50 bg-bg hover:bg-surface-alt hover:border-gorga transition-colors flex flex-col items-center justify-center p-4 text-center cursor-pointer group"
                 >
-                  <div className="w-12 h-12 rounded-full bg-gorga/10 text-gorga flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+                  <div className="w-12 h-12 rounded-full bg-surface-alt text-gorga border border-gold/40 flex items-center justify-center mb-2 group-hover:scale-105 transition-transform shadow-xs">
                     <ImagePlus className="w-6 h-6 stroke-[1.5]" />
                   </div>
                   <span className="text-xs font-semibold text-ink group-hover:text-gorga transition-colors">
@@ -268,7 +268,7 @@ export const UploadMomentModal: React.FC<UploadMomentModalProps> = ({
                   onClose();
                 }}
                 disabled={isUploading}
-                className="flex-1 py-2.5 px-4 rounded-xs border border-gold/40 text-ink bg-surface-alt hover:bg-surface-alt/80 text-xs font-semibold tracking-wider transition-colors cursor-pointer"
+                className="flex-1 py-2.5 px-4 rounded-xs border border-gold/40 text-ink bg-surface-alt hover:bg-surface-alt/80 hover:text-gorga active:bg-surface-alt/60 text-xs font-semibold tracking-wider transition-colors cursor-pointer"
               >
                 Batal
               </button>
@@ -276,15 +276,15 @@ export const UploadMomentModal: React.FC<UploadMomentModalProps> = ({
               <button
                 type="submit"
                 disabled={isUploading || isSuccess}
-                className="flex-1 py-2.5 px-4 rounded-xs bg-gradient-to-r from-gorga via-gorga-bright to-gorga hover:brightness-110 text-on-night border border-gold text-xs font-semibold tracking-wider transition-all shadow-[0_4px_16px_var(--shadow-btn)] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
+                className="flex-1 py-2.5 px-4 rounded-xs bg-gorga bg-gradient-to-r from-gorga via-gorga-bright to-gorga hover:bg-gorga-bright active:bg-gorga text-white border border-gold text-xs font-semibold tracking-wider transition-all shadow-[0_4px_16px_var(--shadow-btn)] hover:shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
               >
                 {isUploading ? (
                   <>
-                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                    <span>Mengunggah...</span>
+                    <Loader2 className="w-3.5 h-3.5 animate-spin text-white" />
+                    <span className="text-white">Mengunggah...</span>
                   </>
                 ) : (
-                  <span>Bagikan Foto</span>
+                  <span className="text-white font-semibold">Bagikan Foto</span>
                 )}
               </button>
             </div>

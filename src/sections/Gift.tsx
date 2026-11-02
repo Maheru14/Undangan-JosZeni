@@ -145,7 +145,7 @@ export const Gift: React.FC = () => {
                         type="button"
                         onClick={() => handleCopy(item.accountNumber, item.provider)}
                         aria-label={`Salin ${item.provider}`}
-                        className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xs border border-gold text-gorga bg-surface-alt hover:bg-gorga hover:text-surface active:scale-98 transition-colors duration-200 text-xs font-body font-semibold tracking-wider min-h-[44px] cursor-pointer"
+                        className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xs border border-gold text-gorga bg-surface-alt hover:bg-gorga hover:text-white active:bg-gorga active:text-white active:scale-98 transition-colors duration-200 text-xs font-body font-semibold tracking-wider min-h-[44px] cursor-pointer shadow-xs"
                       >
                         <Copy className="w-3.5 h-3.5 stroke-[1.5]" />
                         <span>{isAddress ? 'Salin Alamat' : 'Salin Nomor Rekening'}</span>
