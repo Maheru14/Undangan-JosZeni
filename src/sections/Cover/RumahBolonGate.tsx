@@ -26,12 +26,12 @@ export const RumahBolonGate: React.FC<RumahBolonGateProps> = ({ leftRef, rightRe
       {/* BILAH KIRI (Fasad Rumah Bolon Sisi Kiri - viewBox 0 0 300 660) */}
       <div
         ref={leftRef}
-        className="w-1/2 h-full relative overflow-hidden bg-night flex items-center justify-end"
+        className="w-1/2 h-full relative overflow-hidden bg-night flex items-center justify-end will-change-transform [transform:translateZ(0)]"
       >
         {/* 1. SILUET MOTIF GORGA BATAK OTENTIK (TERHUBUNG MULUS 100% KONTINU TANPA SAMBUNGAN) */}
         <div className="absolute top-0 left-0 w-[100vw] h-full pointer-events-none select-none overflow-hidden z-1">
           <div
-            className="w-full h-full bg-repeat opacity-40 filter brightness-105 contrast-120"
+            className="w-full h-full bg-repeat opacity-40"
             style={{
               backgroundImage: 'var(--asset-gorga-illustration, url(/images/gorga/batak-gorga-sapphire.webp))',
               backgroundSize: '440px auto',
@@ -112,12 +112,12 @@ export const RumahBolonGate: React.FC<RumahBolonGateProps> = ({ leftRef, rightRe
       {/* BILAH KANAN (Fasad Rumah Bolon Sisi Kanan - viewBox 300 0 300 660) */}
       <div
         ref={rightRef}
-        className="w-1/2 h-full relative overflow-hidden bg-night flex items-center justify-start"
+        className="w-1/2 h-full relative overflow-hidden bg-night flex items-center justify-start will-change-transform [transform:translateZ(0)]"
       >
         {/* 1. SILUET MOTIF GORGA BATAK OTENTIK (TERHUBUNG MULUS 100% KONTINU TANPA SAMBUNGAN) */}
         <div className="absolute top-0 right-0 w-[100vw] h-full pointer-events-none select-none overflow-hidden z-1">
           <div
-            className="w-full h-full bg-repeat opacity-40 filter brightness-105 contrast-120"
+            className="w-full h-full bg-repeat opacity-40"
             style={{
               backgroundImage: 'var(--asset-gorga-illustration, url(/images/gorga/batak-gorga-sapphire.webp))',
               backgroundSize: '440px auto',

@@ -32,10 +32,11 @@ export const Hero: React.FC = () => {
       return;
     }
 
-    // Ketika undangan dibuka, jalankan video secara instan
-    void videoEl.play().catch(() => {
-      // Browser autoplay policy fallback
-    });
+    // Beri jeda 450ms agar animasi gerbang split-gate selesai bergeser terlebih dahulu
+    // sehingga GPU di HP lawas tidak berebut sumber daya
+    const playTimer = setTimeout(() => {
+      void videoEl.play().catch(() => {});
+    }, 450);
 
     // Observer: Otomatis pause video saat tamu scroll menjauh dari section Hero
     const observer = new IntersectionObserver(
@@ -56,6 +57,7 @@ export const Hero: React.FC = () => {
     observer.observe(sectionEl);
 
     return () => {
+      clearTimeout(playTimer);
       observer.disconnect();
     };
   }, [isOpened]);
@@ -128,11 +130,11 @@ export const Hero: React.FC = () => {
             ref={videoRef}
             src="/video/hero-prewed.mp4"
             poster="/video/hero-poster.jpg"
-            autoPlay
+            autoPlay={false}
             muted={isVideoMuted}
             loop
             playsInline
-            preload="auto"
+            preload={isOpened ? 'auto' : 'none'}
             className="w-full h-full object-cover object-center filter contrast-[1.04] brightness-[0.98]"
           />
 

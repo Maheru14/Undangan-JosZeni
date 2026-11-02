@@ -20,7 +20,7 @@ export function useAudio(audioSrc: string): UseAudioReturn {
   useEffect(() => {
     const audio = new Audio(audioSrc);
     audio.loop = true;
-    audio.preload = 'auto';
+    audio.preload = 'none';
     audio.volume = DEFAULT_VOLUME;
     audioRef.current = audio;
 

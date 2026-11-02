@@ -82,18 +82,20 @@ export const Cover: React.FC = () => {
         leftGateRef.current,
         {
           xPercent: -105,
-          duration: 1.1,
-          ease: 'power3.inOut',
+          duration: 1.0,
+          ease: 'power2.inOut',
+          force3D: true,
         },
-        '-=0.1',
+        '-=0.08',
       );
 
       tl.to(
         rightGateRef.current,
         {
           xPercent: 105,
-          duration: 1.1,
-          ease: 'power3.inOut',
+          duration: 1.0,
+          ease: 'power2.inOut',
+          force3D: true,
         },
         '<',
       );
