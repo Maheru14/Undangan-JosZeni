@@ -253,7 +253,7 @@ export const weddingConfig: WeddingConfig = {
     },
   ],
   audio: {
-    src: '/audio/Jacob Lee - I Belong to You (Lyric Video).mp3',
+    src: '/audio/bgm-jacob-lee.m4a',
     title: 'Jacob Lee - I Belong to You',
   },
   hashtag: '',

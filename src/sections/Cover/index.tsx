@@ -29,12 +29,12 @@ export const Cover: React.FC = () => {
     };
   }, [isOpened]);
 
-  const handleOpenInvitation = async () => {
+  const handleOpenInvitation = () => {
     if (isOpening) return;
     setIsOpening(true);
 
-    // 1. Eksekusi pemutaran audio di dalam gesture klik pengguna
-    await openInvitation();
+    // 1. Eksekusi pemutaran audio di dalam gesture klik pengguna (fire-and-forget, non-blocking agar transisi visual langsung berjalan 0ms)
+    void openInvitation();
 
     // 2. Deteksi preferensi reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -43,7 +43,7 @@ export const Cover: React.FC = () => {
       if (containerRef.current) {
         gsap.to(containerRef.current, {
           opacity: 0,
-          duration: 0.3,
+          duration: 0.25,
           ease: 'power1.out',
           onComplete: () => {
             setIsRemoved(true);
@@ -56,7 +56,7 @@ export const Cover: React.FC = () => {
       return;
     }
 
-    // 3. Urutan Animasi Gerbang Rumah Bolon (GSAP)
+    // 3. Urutan Animasi Gerbang Rumah Bolon (GSAP Responsif & Cepat)
     const tl = gsap.timeline({
       onComplete: () => {
         setIsRemoved(true);
@@ -66,48 +66,48 @@ export const Cover: React.FC = () => {
       },
     });
 
-    // Fade out konten teks atas dan bawah
+    // Fade out konten teks atas dan bawah seketika
     if (contentRef.current) {
       tl.to(contentRef.current, {
         opacity: 0,
-        y: -15,
-        duration: 0.25,
-        ease: 'power2.in',
+        y: -10,
+        duration: 0.2,
+        ease: 'power2.out',
       });
     }
 
-    // Gerbang Rumah Bolon kiri dan kanan terbuka ke samping bersama nama mempelai
+    // Gerbang Rumah Bolon kiri dan kanan terbuka ke samping bersama nama mempelai secara anggun & cepat
     if (leftGateRef.current && rightGateRef.current) {
       tl.to(
         leftGateRef.current,
         {
           xPercent: -105,
-          duration: 1.0,
-          ease: 'power2.inOut',
+          duration: 0.75,
+          ease: 'power3.inOut',
           force3D: true,
         },
-        '-=0.08',
+        '-=0.1',
       );
 
       tl.to(
         rightGateRef.current,
         {
           xPercent: 105,
-          duration: 1.0,
-          ease: 'power2.inOut',
+          duration: 0.75,
+          ease: 'power3.inOut',
           force3D: true,
         },
         '<',
       );
     }
 
-    // Memudarkan wrapper latar penutup
+    // Memudarkan wrapper latar penutup menjelang akhir gerakan gerbang
     if (containerRef.current) {
       tl.to(
         containerRef.current,
         {
           opacity: 0,
-          duration: 0.35,
+          duration: 0.25,
           ease: 'power2.out',
         },
         '-=0.2',
