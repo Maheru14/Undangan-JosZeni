@@ -18,7 +18,6 @@ const Events = lazy(() => import("./sections/Events").then((m) => ({ default: m.
 const Doa = lazy(() => import("./sections/Doa").then((m) => ({ default: m.Doa })));
 const LoveStory = lazy(() => import("./sections/LoveStory").then((m) => ({ default: m.LoveStory })));
 const Gallery = lazy(() => import("./sections/Gallery").then((m) => ({ default: m.Gallery })));
-const GuestMoments = lazy(() => import("./sections/GuestMoments").then((m) => ({ default: m.GuestMoments })));
 const Gift = lazy(() => import("./sections/Gift").then((m) => ({ default: m.Gift })));
 const Rsvp = lazy(() => import("./sections/Rsvp").then((m) => ({ default: m.Rsvp })));
 const Closing = lazy(() => import("./sections/Closing").then((m) => ({ default: m.Closing })));
@@ -98,10 +97,7 @@ function MainLayout() {
               {/* SECTION 6: GALERI FOTO & LIGHTBOX */}
               <Gallery />
 
-              {/* SECTION 7: MOMEN KESERUAN TAMU DI HARI-H */}
-              <GuestMoments />
-
-              {/* SECTION 8: TANDA KASIH & AMPLOP DIGITAL */}
+              {/* SECTION 7: TANDA KASIH & AMPLOP DIGITAL */}
               <Gift />
 
               {/* SECTION 8: KONFIRMASI KEHADIRAN & BUKU TAMU */}

@@ -17,7 +17,7 @@ const NAV_ITEMS: NavItem[] = [
   { id: 'rsvp', label: 'RSVP', icon: MessageSquare },
 ];
 
-const SECTION_IDS = ['hero', 'couple', 'events', 'doa', 'story', 'gallery', 'moments', 'gift', 'rsvp', 'closing'];
+const SECTION_IDS = ['hero', 'couple', 'events', 'doa', 'story', 'gallery', 'gift', 'rsvp', 'closing'];
 
 /**
  * Komponen Floating Bottom Navigation Bar (Dock Bawah).
@@ -54,7 +54,6 @@ export const BottomNav: React.FC = () => {
             activeSection === item.id ||
             (item.id === 'couple' && activeSection === 'story') ||
             (item.id === 'events' && activeSection === 'doa') ||
-            (item.id === 'gallery' && activeSection === 'moments') ||
             (item.id === 'rsvp' && (activeSection === 'gift' || activeSection === 'closing'));
 
           return (
