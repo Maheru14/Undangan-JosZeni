@@ -252,9 +252,9 @@ export const GalleryLayout4: React.FC<GalleryLayout4Props> = ({
                     : 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease, box-shadow 0.5s ease',
                 }}
               >
-                {/* Foto Resolusi Penuh */}
+                {/* Foto Resolusi Teroptimasi untuk Carousel */}
                 <img
-                  src={item.src}
+                  src={item.thumb || item.src}
                   alt={item.alt}
                   loading={Math.abs(offset) <= 1 ? 'eager' : 'lazy'}
                   decoding="async"

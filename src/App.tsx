@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { AppContextProvider, useAppContext } from "./context/AppContext";
 import { Cover } from "./sections/Cover";
 import { MusicToggle } from "./components/layout/MusicToggle";
@@ -6,22 +6,37 @@ import { BottomNav } from "./components/layout/BottomNav";
 import { MainNavbar } from "./components/layout/MainNavbar";
 import { MainFooter } from "./components/layout/MainFooter";
 import { Hero } from "./sections/Hero";
-import { Couple } from "./sections/Couple";
-import { Events } from "./sections/Events";
-import { Doa } from "./sections/Doa";
-import { LoveStory } from "./sections/LoveStory";
-import { Gallery } from "./sections/Gallery";
-import { GuestMoments } from "./sections/GuestMoments";
-import { Gift } from "./sections/Gift";
-import { Rsvp } from "./sections/Rsvp";
-import { Closing } from "./sections/Closing";
 import { CornerOrnament } from "./components/decor/CornerOrnament";
 import { GorgaWatermark } from "./components/decor/GorgaWatermark";
 import { GorgaFlourishWatermark } from "./components/decor/GorgaFlourishWatermark";
 import { GorgaBackground } from "./components/decor/GorgaBackground";
 
+// Code-splitting via React.lazy: Mengeluarkan bundle berat (Supabase 220KB, Galeri 4 layout, Form)
+// dari initial critical path agar Cover, tombol, dan gerbang Rumah Bolon muncul seketika (< 300ms)
+const Couple = lazy(() => import("./sections/Couple").then((m) => ({ default: m.Couple })));
+const Events = lazy(() => import("./sections/Events").then((m) => ({ default: m.Events })));
+const Doa = lazy(() => import("./sections/Doa").then((m) => ({ default: m.Doa })));
+const LoveStory = lazy(() => import("./sections/LoveStory").then((m) => ({ default: m.LoveStory })));
+const Gallery = lazy(() => import("./sections/Gallery").then((m) => ({ default: m.Gallery })));
+const GuestMoments = lazy(() => import("./sections/GuestMoments").then((m) => ({ default: m.GuestMoments })));
+const Gift = lazy(() => import("./sections/Gift").then((m) => ({ default: m.Gift })));
+const Rsvp = lazy(() => import("./sections/Rsvp").then((m) => ({ default: m.Rsvp })));
+const Closing = lazy(() => import("./sections/Closing").then((m) => ({ default: m.Closing })));
+
 function MainLayout() {
-  const { config } = useAppContext();
+  const { config, isOpened } = useAppContext();
+  const [isIdlePrefetched, setIsIdlePrefetched] = useState<boolean>(false);
+
+  // Prefetch seksi-seksi bawah setelah 2 detik idle saat tamu sedang membaca nama di cover
+  useEffect(() => {
+    if (isOpened) return;
+    const timer = setTimeout(() => {
+      setIsIdlePrefetched(true);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [isOpened]);
+
+  const shouldMountRest = isOpened || isIdlePrefetched;
 
   // Sinkronisasi dinamis document.title dengan nama kedua mempelai
   useEffect(() => {
@@ -62,35 +77,40 @@ function MainLayout() {
           {/* WATERMARK SULUR BATIK GORGA EMAS DI LATAR BELAKANG KERTAS GADING */}
           <GorgaFlourishWatermark opacity={0.05} />
 
-          {/* SECTION 1: HERO & COUNTDOWN */}
+          {/* SECTION 1: HERO & COUNTDOWN (SYNCHRONOUS, LANGSUNG TAMPIL DI BALIK GERBANG) */}
           <Hero />
 
-          {/* SECTION 2: PROFIL KEDUA MEMPELAI */}
-          <Couple />
+          {/* SECTIONS 2-9: LAZY LOADED WITH SUSPENSE (TIDAK MEREBUT BANDWIDTH COVER) */}
+          {shouldMountRest && (
+            <Suspense fallback={null}>
+              {/* SECTION 2: PROFIL KEDUA MEMPELAI */}
+              <Couple />
 
-          {/* SECTION 3: RANGKAIAN ACARA (MARTUMPOL, PEMBERKATAN HKBP, PESTA ADAT NA GOK) */}
-          <Events />
+              {/* SECTION 3: RANGKAIAN ACARA (MARTUMPOL, PEMBERKATAN HKBP, PESTA ADAT NA GOK) */}
+              <Events />
 
-          {/* SECTION 4: AYAT FIRMAN TUHAN & JANJI SUCI */}
-          <Doa />
+              {/* SECTION 4: AYAT FIRMAN TUHAN & JANJI SUCI */}
+              <Doa />
 
-          {/* SECTION 5: KISAH PERJALANAN CINTA */}
-          <LoveStory />
+              {/* SECTION 5: KISAH PERJALANAN CINTA */}
+              <LoveStory />
 
-          {/* SECTION 6: GALERI FOTO & LIGHTBOX */}
-          <Gallery />
+              {/* SECTION 6: GALERI FOTO & LIGHTBOX */}
+              <Gallery />
 
-          {/* SECTION 7: MOMEN KESERUAN TAMU DI HARI-H */}
-          <GuestMoments />
+              {/* SECTION 7: MOMEN KESERUAN TAMU DI HARI-H */}
+              <GuestMoments />
 
-          {/* SECTION 8: TANDA KASIH & AMPLOP DIGITAL */}
-          <Gift />
+              {/* SECTION 8: TANDA KASIH & AMPLOP DIGITAL */}
+              <Gift />
 
-          {/* SECTION 8: KONFIRMASI KEHADIRAN & BUKU TAMU */}
-          <Rsvp />
+              {/* SECTION 8: KONFIRMASI KEHADIRAN & BUKU TAMU */}
+              <Rsvp />
 
-          {/* SECTION 9: PENUTUP & UCAPAN TERIMA KASIH */}
-          <Closing />
+              {/* SECTION 9: PENUTUP & UCAPAN TERIMA KASIH */}
+              <Closing />
+            </Suspense>
+          )}
 
           {/* 2. FOOTER DENGAN MOTIF KAIN ULOS BATAK (DI BAGIAN DASAR CARD) */}
           <MainFooter />

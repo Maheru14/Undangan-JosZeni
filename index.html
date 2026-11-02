@@ -31,16 +31,21 @@
     <meta name="twitter:description" content="Pernikahan Josua Simanjuntak &amp; Zeni br. Siregar - Buka undangan digital." />
     <meta name="twitter:image" content="https://undangan-jos-zeni.vercel.app/images/og-cover.jpg" />
 
-    <!-- Google Fonts Preconnect -->
+    <!-- Preload Critical Cover Image Assets for Instant First Paint -->
+    <link rel="preload" href="/images/gorga/batak-gorga-sapphire.webp" as="image" type="image/webp" fetchpriority="high" />
+    <link rel="preload" href="/images/flowers/palette-2/6-floral-stage.webp" as="image" type="image/webp" fetchpriority="high" />
+    <link rel="preload" href="/images/flowers/palette-2/7-floral-curved.webp" as="image" type="image/webp" />
+
+    <!-- Google Fonts Preconnect & Non-blocking Load -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
     />
   </head>
-  <body class="bg-bg text-ink antialiased selection:bg-gorga/20 selection:text-ink">
-    <div id="root"></div>
+  <body class="bg-night text-on-night antialiased selection:bg-gorga/20 selection:text-ink" style="background-color: #071224;">
+    <div id="root" style="background-color: #071224; min-height: 100vh;"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

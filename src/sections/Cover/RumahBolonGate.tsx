@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAppContext } from '../../context/AppContext';
+import { RumahBolonHalfSvg } from './RumahBolonHalfSvg';
 
 interface RumahBolonGateProps {
   leftRef: React.RefObject<HTMLDivElement | null>;
@@ -63,10 +64,8 @@ export const RumahBolonGate: React.FC<RumahBolonGateProps> = ({ leftRef, rightRe
 
         {/* 3. FASAD RUMAH BOLON SISI KIRI & NAMA MEMPELAI */}
         <div className="relative z-20 h-[36vh] sm:h-[44vh] max-h-[290px] sm:max-h-[420px] w-auto flex items-center justify-end -translate-y-16 sm:-translate-y-20 md:-translate-y-24 pr-0">
-          <img
-            src="/images/rumah-bolon/rumah-bolon-left.svg"
-            alt=""
-            decoding="async"
+          <RumahBolonHalfSvg
+            side="left"
             className="h-full w-auto max-w-none object-contain drop-shadow-[0_2px_8px_rgba(216,180,95,0.35)]"
           />
 
@@ -149,10 +148,8 @@ export const RumahBolonGate: React.FC<RumahBolonGateProps> = ({ leftRef, rightRe
 
         {/* 3. FASAD RUMAH BOLON SISI KANAN & NAMA MEMPELAI */}
         <div className="relative z-20 h-[36vh] sm:h-[44vh] max-h-[290px] sm:max-h-[420px] w-auto flex items-center justify-start -translate-y-16 sm:-translate-y-20 md:-translate-y-24 pl-0">
-          <img
-            src="/images/rumah-bolon/rumah-bolon-right.svg"
-            alt=""
-            decoding="async"
+          <RumahBolonHalfSvg
+            side="right"
             className="h-full w-auto max-w-none object-contain drop-shadow-[0_2px_8px_rgba(216,180,95,0.35)]"
           />
 
