@@ -1,0 +1,81 @@
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#root {
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-web, #0D0905);
+  color: var(--ink);
+  margin: 0;
+  padding: 0;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Tabular figures for countdown numbers */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   ANIMASI GANTUNGAN BUNGA BERAYUN (Hardware-Accelerated Pendulum Sway)
+   Super ringan: 0 KB JS runtime, 60fps GPU compositor, zero CPU cost
+   Tidak menggunakan will-change permanen agar hemat memori GPU pada hp lawas
+   ========================================================================== */
+@keyframes floral-sway {
+  0% {
+    transform: rotate(-2.8deg);
+  }
+  50% {
+    transform: rotate(2.8deg);
+  }
+  100% {
+    transform: rotate(-2.8deg);
+  }
+}
+
+@keyframes floral-sway-subtle {
+  0% {
+    transform: rotate(-1.6deg);
+  }
+  50% {
+    transform: rotate(1.6deg);
+  }
+  100% {
+    transform: rotate(-1.6deg);
+  }
+}
+
+.animate-floral-sway {
+  transform-origin: 50% 0%;
+  animation: floral-sway 4.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+.animate-floral-sway-subtle {
+  transform-origin: 50% 0%;
+  animation: floral-sway-subtle 5.4s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+

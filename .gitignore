@@ -1,0 +1,43 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+.env
+.env.*
+!.env.example
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.vercel
+
+# Raw & Temporary Assets (keep repository lean)
+raw-assets/
+public/contoh asset/
+public/1257.jpg
+public/413.jpg
+public/Screenshot*
+*-bak.*
+*.bak
+
+# Root test screenshots & subagent folders
+/*.png
+.playwright-mcp/
+batak-package/
+

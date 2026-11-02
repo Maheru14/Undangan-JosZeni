@@ -1,0 +1,93 @@
+:root {
+  /* Bentuk & Elevasi Dasar */
+  --radius: 2px;
+
+  /* Tipografi */
+  --font-display: 'Cinzel', Georgia, serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+/* ==========================================================================
+   PALET WARNA #1 (Classic Tilu Bolit: Hitam Gorga, Merah Gorga, Krem Gading & Emas)
+   Dapat diaktifkan kapan saja via attribute [data-theme="palette-1"] pada <html> / <body>.
+   ========================================================================== */
+[data-theme="palette-1"] {
+  --bg-web: #0E0A09;          /* Background web paling luar */
+  --bg-main: #FFFDF9;         /* Background utama kartu: gading royal */
+  --bg: #FBF8F3;              /* Background krem putih hangat */
+  --bg-alt: #F4EEE6;          /* Background selang-seling */
+  --surface: #FFFDF9;         /* Warna card putih/krem */
+  --surface-alt: #EFE8DC;     /* Warna container dalam card */
+  --ink: #2B1E1A;             /* Teks utama: espresso charcoal pekat (kontras 15.2:1) */
+  --ink-muted: #5E4A42;       /* Teks sekunder: coklat kayu hangat (kontras 7.8:1) */
+  --night: #15100E;           /* Warna gelap panggung cover & section firman */
+  --on-night: #F6F1EA;        /* Teks di atas panggung malam (kontras 16.8:1) */
+  --gorga: #9B2C24;           /* Merah Gorga khas Batak (kontras 7.1:1 di atas bg) */
+  --gorga-bright: #E0645A;    /* Merah menyala di atas section malam (kontras 5.5:1) */
+  --gold: #B8924A;            /* Benang emas ulos untuk garis border & ornamen SVG */
+  --gold-bright: #D9B45E;     /* Emas bersinar di atas section malam (kontras 9.6:1) */
+  --gold-text: #7A5A22;       /* Teks aksen emas terbaca jelas di atas krem (kontras 6.0:1) */
+  --sage: #4F5B4A;            /* Aksen sekunder */
+  --line: #E6DDD0;            /* Garis pemisah hairline di atas krem */
+  --shadow-btn: rgba(155, 44, 36, 0.4);
+  --shadow-subtle: 0 1px 4px rgba(43, 30, 26, 0.08);
+
+  /* Asset Image URLs untuk Palet #1 */
+  --asset-gorga-illustration: url('/images/gorga/batak-batik-illustration.webp');
+  --asset-web-pattern: url('/images/gorga/batak-web-pattern.webp');
+  --asset-border-strip: url('/images/gorga/batak-border-strip.webp');
+  --asset-flower-corner: url('/images/flowers/palette-1/1-floral-corner.webp');
+  --asset-flower-wreath: url('/images/flowers/palette-1/2-floral-wreath.webp');
+  --asset-flower-bouquet: url('/images/flowers/palette-1/3-floral-bouquet.webp');
+  --asset-flower-arch: url('/images/flowers/palette-1/4-floral-arch.webp');
+  --asset-flower-crest: url('/images/flowers/palette-1/5-floral-crest.webp');
+  --asset-flower-stage: url('/images/flowers/palette-1/6-floral-stage.webp');
+  --bg-web-gradient-from: #0A0706;
+  --bg-web-gradient-via: #140C0A;
+  --bg-web-gradient-to: #080504;
+}
+
+/* ==========================================================================
+   PALET WARNA #2 (Danau Toba Royal Sapphire & Midnight Navy with Champagne Gold Thread)
+   Aktif sebagai default (:root) & [data-theme="palette-2"].
+   Disesuaikan 100% dengan foto-foto galeri (kebaya biru royal sapphire Zeni, jas navy Jos, dan Danau Toba).
+   ========================================================================== */
+:root,
+:root[data-theme="palette-2"],
+[data-theme="palette-2"],
+[data-theme="batak"] {
+  --bg-web: #060D1A;          /* Background web paling luar: Danau Toba Sapphire Night */
+  --bg-main: #F7FAFD;         /* Background utama kartu: porcelain pearl white dengan refleksi danau jernih */
+  --bg: #F0F5FA;              /* Background ice sapphire paper lembut */
+  --bg-alt: #E5EFF8;          /* Background selang-seling: sutra biru es */
+  --surface: #FFFFFF;         /* Warna card putih murni kristal */
+  --surface-alt: #DFEBF7;     /* Warna container dalam card: sapphire tint */
+  --ink: #0A1628;             /* Teks utama: midnight navy pekat (kontras 16.5:1 terhadap bg-main) */
+  --ink-muted: #344C6E;       /* Teks sekunder: slate blue danau toba (kontras 7.2:1) */
+  --night: #071224;           /* Warna gelap panggung cover & section firman */
+  --on-night: #F0F6FC;        /* Teks di atas panggung malam (kontras 17:1) */
+  --gorga: #174382;           /* Royal Sapphire Blue dari busana Zeni di tepian Danau Toba */
+  --gorga-bright: #2E6FD4;    /* Luminous Sapphire Blue menyala di atas section malam */
+  --gold: #B38E46;            /* Benang emas ulos champagne */
+  --gold-bright: #DFC48A;     /* Emas champagne bersinar di atas navy */
+  --gold-text: #6E5220;       /* Teks aksen emas terbaca jelas di atas putih */
+  --sage: #2C526A;            /* Aksen sekunder: pinus Danau Toba */
+  --line: #D0E2F2;            /* Garis pemisah hairline biru es */
+  --shadow-btn: rgba(23, 67, 130, 0.45);
+  --shadow-subtle: 0 1px 4px rgba(10, 22, 40, 0.08);
+
+  /* Asset Image URLs untuk Palet #2 */
+  --asset-gorga-illustration: url('/images/gorga/batak-gorga-sapphire.webp');
+  --asset-web-pattern: url('/images/gorga/batak-web-sapphire.webp');
+  --asset-border-strip: url('/images/gorga/batak-border-sapphire.webp');
+  --asset-flower-corner: url('/images/flowers/palette-2/1-floral-corner.webp');
+  --asset-flower-wreath: url('/images/flowers/palette-2/2-floral-wreath.webp');
+  --asset-flower-bouquet: url('/images/flowers/palette-2/3-floral-bouquet.webp');
+  --asset-flower-arch: url('/images/flowers/palette-2/4-floral-arch.webp');
+  --asset-flower-crest: url('/images/flowers/palette-2/5-floral-crest.webp');
+  --asset-flower-stage: url('/images/flowers/palette-2/6-floral-stage.webp');
+  --bg-web-gradient-from: #060D1A;
+  --bg-web-gradient-via: #09162D;
+  --bg-web-gradient-to: #040810;
+}

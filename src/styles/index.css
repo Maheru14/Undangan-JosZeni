@@ -1,0 +1,27 @@
+@import "tailwindcss";
+@import "./tokens.css";
+@import "./base.css";
+
+@theme {
+  --color-bg-web: var(--bg-web);
+  --color-bg-main: var(--bg-main);
+  --color-bg: var(--bg);
+  --color-bg-alt: var(--bg-alt);
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-night: var(--night);
+  --color-on-night: var(--on-night);
+  --color-gorga: var(--gorga);
+  --color-gorga-bright: var(--gorga-bright);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-gold-text: var(--gold-text);
+  --color-sage: var(--sage);
+  --color-line: var(--line);
+  --font-display: var(--font-display);
+  --font-serif: var(--font-serif);
+  --font-body: var(--font-body);
+  --radius-sm: var(--radius);
+}
