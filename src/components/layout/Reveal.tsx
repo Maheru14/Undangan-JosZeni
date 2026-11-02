@@ -59,20 +59,10 @@ export const Reveal: React.FC<RevealProps> = ({
     const isInitiallyVisible = rect.top < window.innerHeight && rect.bottom > 0;
 
     if (isInitiallyVisible) {
-      // Jika sudah di viewport saat halaman dimuat (misal Hero):
-      gsap.fromTo(
-        el,
-        { opacity: 0, x: initialX * 0.5, y: initialY * 0.5 },
-        {
-          opacity: 1,
-          x: 0,
-          y: 0,
-          duration,
-          delay: Math.min(delay, 0.2),
-          ease: 'power2.out',
-          overwrite: 'auto',
-        },
-      );
+      // Jika sudah di viewport awal (Hero & Couple), langsung tampil tanpa tween tersembunyi
+      // sehingga tidak membebani komposit GPU saat cover gerbang sedang bergeser
+      el.style.opacity = '1';
+      el.style.transform = 'none';
     } else {
       // Set posisi tersembunyi di luar viewport
       gsap.set(el, {

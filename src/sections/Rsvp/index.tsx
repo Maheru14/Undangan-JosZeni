@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useAppContext } from '../../context/AppContext';
 import { Divider } from '../../components/decor/Divider';
 import { GorgaWatermark } from '../../components/decor/GorgaWatermark';
 import { rsvpStorage, type RsvpEntry } from '../../lib/storageAdapter';
@@ -8,9 +9,12 @@ import { FloralAccent } from '../../components/decor/FloralAccent';
 import { Reveal } from '../../components/layout/Reveal';
 
 export const Rsvp: React.FC = () => {
+  const { isOpened } = useAppContext();
   const [entries, setEntries] = useState<RsvpEntry[]>([]);
 
   useEffect(() => {
+    if (!isOpened) return;
+
     void rsvpStorage.getAll().then((data) => {
       setEntries(data);
     });
@@ -31,7 +35,7 @@ export const Rsvp: React.FC = () => {
       );
       return unsubscribe;
     }
-  }, []);
+  }, [isOpened]);
 
   const handleNewEntry = (savedEntry: RsvpEntry) => {
     setEntries((prev) => {

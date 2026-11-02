@@ -32,11 +32,11 @@ export const Hero: React.FC = () => {
       return;
     }
 
-    // Beri jeda 450ms agar animasi gerbang split-gate selesai bergeser terlebih dahulu
-    // sehingga GPU di HP lawas tidak berebut sumber daya
+    // Beri jeda 1000ms agar animasi gerbang split-gate selesai bergeser sepenuhnya terlebih dahulu
+    // sehingga GPU dan video decoder di smartphone tidak berebut thread di awal
     const playTimer = setTimeout(() => {
       void videoEl.play().catch(() => {});
-    }, 450);
+    }, 1000);
 
     // Observer: Otomatis pause video saat tamu scroll menjauh dari section Hero
     const observer = new IntersectionObserver(
@@ -76,13 +76,11 @@ export const Hero: React.FC = () => {
 
     gsap.fromTo(
       container,
-      { opacity: 0, scale: 0.96, y: 20 },
+      { opacity: 0 },
       {
         opacity: 1,
-        scale: 1,
-        y: 0,
-        duration: 1.2,
-        delay: 0.25,
+        duration: 0.6,
+        delay: 0.9,
         ease: 'power2.out',
       },
     );

@@ -41,12 +41,12 @@ export const RumahBolonGate: React.FC<RumahBolonGateProps> = ({ leftRef, rightRe
         </div>
 
         {/* 2. LINGKUNGAN / PORTAL EMAS INTI (BERSIH DENGAN PENDARAN EMAS HALUS) */}
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-[364px] sm:w-[500px] md:w-[540px] h-[calc(100vh-24px)] sm:h-[calc(100vh-32px)] max-h-[824px] sm:max-h-[760px] pointer-events-none z-5 rounded-full bg-night shadow-[0_0_35px_rgba(0,0,0,0.85)]">
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-[364px] sm:w-[500px] md:w-[540px] h-[calc(100vh-24px)] sm:h-[calc(100vh-32px)] max-h-[824px] sm:max-h-[760px] pointer-events-none z-5 rounded-full bg-night border border-gold-bright/35 shadow-md">
           {/* Pendaran Cahaya Elegan di Tengah Rumah Bolon */}
           <div className="absolute inset-0 rounded-full bg-radial from-gold-bright/22 via-gorga/15 to-transparent pointer-events-none" />
 
           {/* Cincin Luar Utama Emas Bersinar */}
-          <div className="absolute inset-0 rounded-full border-[1.5px] border-gold-bright/85 shadow-[0_0_24px_rgba(216,180,95,0.45)]" />
+          <div className="absolute inset-0 rounded-full border-[1.5px] border-gold-bright/85 ring-1 ring-gold-bright/40" />
 
           {/* Cincin Konsentris Putus-Putus */}
           <div className="absolute inset-2.5 sm:inset-3 rounded-full border border-gold-bright/40 border-dashed" />
@@ -67,7 +67,7 @@ export const RumahBolonGate: React.FC<RumahBolonGateProps> = ({ leftRef, rightRe
             src="/images/rumah-bolon/rumah-bolon-left.svg"
             alt=""
             decoding="async"
-            className="h-full w-auto max-w-none object-contain drop-shadow-[0_4px_24px_rgba(216,180,95,0.45)]"
+            className="h-full w-auto max-w-none object-contain drop-shadow-[0_2px_8px_rgba(216,180,95,0.35)]"
           />
 
           {/* NAMA MEMPELAI PRIA (JOS) - FLANKING SISI KIRI ATAP */}
@@ -79,7 +79,7 @@ export const RumahBolonGate: React.FC<RumahBolonGateProps> = ({ leftRef, rightRe
             </div>
 
             {/* Nama Panggilan Utama */}
-            <h2 className="font-display text-base sm:text-2xl md:text-3xl lg:text-4xl font-medium text-gold-bright tracking-[0.15em] sm:tracking-[0.2em] uppercase leading-none drop-shadow-[0_2px_14px_rgba(216,180,95,0.5)]">
+            <h2 className="font-display text-base sm:text-2xl md:text-3xl lg:text-4xl font-medium text-gold-bright tracking-[0.15em] sm:tracking-[0.2em] uppercase leading-none drop-shadow-[0_1px_6px_rgba(216,180,95,0.4)]">
               {config.couple.groom.shortName}
             </h2>
 
@@ -127,12 +127,12 @@ export const RumahBolonGate: React.FC<RumahBolonGateProps> = ({ leftRef, rightRe
         </div>
 
         {/* 2. LINGKUNGAN / PORTAL EMAS INTI (BERSIH DENGAN PENDARAN EMAS HALUS) */}
-        <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-[364px] sm:w-[500px] md:w-[540px] h-[calc(100vh-24px)] sm:h-[calc(100vh-32px)] max-h-[824px] sm:max-h-[760px] pointer-events-none z-5 rounded-full bg-night shadow-[0_0_35px_rgba(0,0,0,0.85)]">
+        <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-[364px] sm:w-[500px] md:w-[540px] h-[calc(100vh-24px)] sm:h-[calc(100vh-32px)] max-h-[824px] sm:max-h-[760px] pointer-events-none z-5 rounded-full bg-night border border-gold-bright/35 shadow-md">
           {/* Pendaran Cahaya Elegan di Tengah Rumah Bolon */}
           <div className="absolute inset-0 rounded-full bg-radial from-gold-bright/22 via-gorga/15 to-transparent pointer-events-none" />
 
           {/* Cincin Luar Utama Emas Bersinar */}
-          <div className="absolute inset-0 rounded-full border-[1.5px] border-gold-bright/85 shadow-[0_0_24px_rgba(216,180,95,0.45)]" />
+          <div className="absolute inset-0 rounded-full border-[1.5px] border-gold-bright/85 ring-1 ring-gold-bright/40" />
 
           {/* Cincin Konsentris Putus-Putus */}
           <div className="absolute inset-2.5 sm:inset-3 rounded-full border border-gold-bright/40 border-dashed" />
@@ -153,7 +153,7 @@ export const RumahBolonGate: React.FC<RumahBolonGateProps> = ({ leftRef, rightRe
             src="/images/rumah-bolon/rumah-bolon-right.svg"
             alt=""
             decoding="async"
-            className="h-full w-auto max-w-none object-contain drop-shadow-[0_4px_24px_rgba(216,180,95,0.45)]"
+            className="h-full w-auto max-w-none object-contain drop-shadow-[0_2px_8px_rgba(216,180,95,0.35)]"
           />
 
           {/* NAMA MEMPELAI WANITA (ZENI) - FLANKING SISI KANAN ATAP */}
@@ -165,7 +165,7 @@ export const RumahBolonGate: React.FC<RumahBolonGateProps> = ({ leftRef, rightRe
             </div>
 
             {/* Nama Panggilan Utama */}
-            <h2 className="font-display text-base sm:text-2xl md:text-3xl lg:text-4xl font-medium text-gold-bright tracking-[0.15em] sm:tracking-[0.2em] uppercase leading-none drop-shadow-[0_2px_14px_rgba(216,180,95,0.5)]">
+            <h2 className="font-display text-base sm:text-2xl md:text-3xl lg:text-4xl font-medium text-gold-bright tracking-[0.15em] sm:tracking-[0.2em] uppercase leading-none drop-shadow-[0_1px_6px_rgba(216,180,95,0.4)]">
               {config.couple.bride.shortName}
             </h2>
 

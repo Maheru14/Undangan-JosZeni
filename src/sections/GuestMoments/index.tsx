@@ -25,7 +25,7 @@ function formatRelativeTime(isoDate: string): string {
 }
 
 export const GuestMoments: React.FC = () => {
-  const { config } = useAppContext();
+  const { config, isOpened } = useAppContext();
   const [moments, setMoments] = useState<GuestMoment[]>([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isLightboxOpen, setIsLightboxOpen] = useState<boolean>(false);
@@ -75,6 +75,8 @@ export const GuestMoments: React.FC = () => {
   }, [unlockIsoDate]);
 
   useEffect(() => {
+    if (!isOpened) return;
+
     // 1. Ambil data foto momen dari Supabase
     void guestMomentsStorage.getAll().then((data) => {
       setMoments(data);
@@ -90,7 +92,7 @@ export const GuestMoments: React.FC = () => {
       });
       return unsubscribe;
     }
-  }, []);
+  }, [isOpened]);
 
   const handleUploadSuccess = (newMoment: GuestMoment) => {
     setMoments((prev) => {
