@@ -12,6 +12,60 @@ interface UploadMomentModalProps {
   isUnlocked?: boolean;
 }
 
+/**
+ * Otomatis kompres foto kamera smartphone (dari ~5-10 MB menjadi ~250 KB)
+ * sebelum dikirim ke Supabase Storage. Menjaga kualitas HD tajam sekaligus
+ * mendeteksi file corrupt secara dini dan menghemat kuota penyimpanan.
+ */
+async function compressImage(file: File, maxWidth = 1280, quality = 0.82): Promise<File> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      let { width, height } = img;
+      if (width > maxWidth || height > maxWidth) {
+        if (width > height) {
+          height = Math.round((height * maxWidth) / width);
+          width = maxWidth;
+        } else {
+          width = Math.round((width * maxWidth) / height);
+          height = maxWidth;
+        }
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        resolve(file);
+        return;
+      }
+      ctx.drawImage(img, 0, 0, width, height);
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) {
+            resolve(file);
+            return;
+          }
+          const compressed = new File([blob], file.name.replace(/\.[^/.]+$/, '.jpg'), {
+            type: 'image/jpeg',
+            lastModified: Date.now(),
+          });
+          resolve(compressed);
+        },
+        'image/jpeg',
+        quality
+      );
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new Error('File foto rusak atau tidak dapat dibaca.'));
+    };
+    img.src = url;
+  });
+}
+
 export const UploadMomentModal: React.FC<UploadMomentModalProps> = ({
   isOpen,
   onClose,
@@ -87,8 +141,14 @@ export const UploadMomentModal: React.FC<UploadMomentModalProps> = ({
     setIsUploading(true);
 
     try {
+      // 1. Kompres dan verifikasi foto sebelum dikirim ke Supabase
+      const fileToUpload = await compressImage(selectedFile).catch((err) => {
+        throw new Error(err instanceof Error ? err.message : 'File foto rusak atau tidak dapat dibaca.');
+      });
+
+      // 2. Upload file yang sudah dioptimasi (~250 KB) ke Supabase Storage
       const moment = await guestMomentsStorage.upload(
-        selectedFile,
+        fileToUpload,
         name.trim(),
         caption.trim(),
       );
@@ -100,8 +160,9 @@ export const UploadMomentModal: React.FC<UploadMomentModalProps> = ({
         handleReset();
         onClose();
       }, 1500);
-    } catch {
-      setErrorMessage('Gagal mengunggah foto. Silakan periksa koneksi dan coba lagi.');
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Gagal mengunggah foto. Silakan periksa koneksi dan coba lagi.';
+      setErrorMessage(msg);
     } finally {
       setIsUploading(false);
     }

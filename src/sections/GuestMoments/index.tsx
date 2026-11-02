@@ -216,6 +216,9 @@ export const GuestMoments: React.FC = () => {
                     alt={`Foto oleh ${moment.guestName}`}
                     loading="lazy"
                     decoding="async"
+                    onError={(e) => {
+                      (e.currentTarget as HTMLElement).style.opacity = '0.3';
+                    }}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
 

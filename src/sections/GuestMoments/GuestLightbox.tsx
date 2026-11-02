@@ -99,6 +99,9 @@ export const GuestLightbox: React.FC<GuestLightboxProps> = ({
             src={currentMoment.imageUrl}
             alt={`Foto momen oleh ${currentMoment.guestName}`}
             decoding="async"
+            onError={(e) => {
+              (e.currentTarget as HTMLElement).style.opacity = '0.4';
+            }}
             className="max-h-[70vh] w-auto max-w-full object-contain"
           />
         </div>
