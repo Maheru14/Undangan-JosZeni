@@ -20,6 +20,7 @@ export interface WeddingEvent {
   venueName: string;
   address: string;
   mapsUrl: string;
+  note?: string;
 }
 
 export interface LoveStoryItem {
@@ -121,29 +122,30 @@ export const weddingConfig: WeddingConfig = {
   },
   events: [
     {
-      id: 'pernikahan',
-      name: 'Pernikahan Jos & Zeni',
-      date: 'Segera Diumumkan',
-      isoDate: '',
-      time: '-',
-      venueName: 'Tempat Segera Diumumkan',
-      address: 'Informasi detail lokasi acara akan segera diperbarui',
-      mapsUrl: '#',
+      id: 'pemberkatan',
+      name: 'Pemberkatan Pernikahan',
+      date: 'Sabtu, 28 November 2026',
+      isoDate: '2026-11-28T08:00:00+07:00',
+      time: '08:00 WIB s/d Selesai',
+      venueName: 'Gereja GMI Hermon',
+      address: 'Jalan Kampung Pensiunan no. 52 A, Tebing-Tinggi, Kab. Empat Lawang',
+      mapsUrl: 'https://maps.app.goo.gl/Vk4yftrybvfxRdSRA',
     },
     {
       id: 'adat',
-      name: 'Resepsi Pernikahan',
-      date: 'Segera Diumumkan',
-      isoDate: '',
-      time: '-',
-      venueName: 'Tempat Segera Diumumkan',
-      address: 'Informasi detail lokasi acara akan segera diperbarui',
-      mapsUrl: '#',
+      name: 'Pesta Adat Batak & Jamuan Makan',
+      date: 'Sabtu, 28 November 2026',
+      isoDate: '2026-11-28T11:00:00+07:00',
+      time: 'Setelah Acara Pemberkatan s/d Selesai',
+      venueName: 'Lapangan Futsal Jayaloka (Belakang Koramil)',
+      address: 'Lingkungan Jayaloka 1 RT 03 RW 01 Jayaloka, Kec. Tebing-Tinggi, Kab. Empat Lawang',
+      mapsUrl: 'https://maps.app.goo.gl/HU8Cm4WgkS247CUU9?g_st=iw',
+      note: 'Setelah selesai acara pemberkatan Nikah dari Gereja, kami mengharapkan kehadiran Bapak/Ibu/Saudara/i untuk mengikuti jamuan makan serta mengikuti acara adat.',
     },
   ],
   countdown: {
-    targetIsoDate: '',
-    expiredLabel: 'Tanggal Acara Akan Segera Diumumkan',
+    targetIsoDate: '2026-11-28T08:00:00+07:00',
+    expiredLabel: 'Pemberkatan Kudus Telah Berlangsung',
   },
   quote: {
     verse: 'Matius 19:6',

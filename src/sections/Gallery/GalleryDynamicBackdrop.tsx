@@ -1,84 +1,95 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 interface GalleryDynamicBackdropProps {
   src: string;
 }
 
 /**
- * DYNAMIC AMBIENT BACKDROP UNTUK SECTION GALLERY
- * - Berubah dinamis mengikuti foto yang sedang aktif di-scroll
- * - Transisi cross-fade lembut antar foto (dissolve sinematik)
- * - Foto terlihat jelas (blur halus 2px, opacity 50-60%)
- * - Gradasi tipis di bagian atas, bawah, kiri, dan kanan yang meluruh
- *   secara mulus ke dalam warna latar halaman utama (#FBF8F3)
+ * DYNAMIC AMBIENT BACKDROP UNTUK SECTION GALLERY (FLUID LIQUID CROSSFADE)
+ * - Menggunakan arsitektur 2-Slot Alternating Image Layer permanen di DOM.
+ * - Tanpa unmount/remount dengan `key`, sehingga 100% bebas flicker/kedipan putih.
+ * - Cross-fade dissolve sinematik 600ms yang sangat halus antar foto.
+ * - Gradasi multi-arah meluruh lembut ke dalam palet latar halaman (#F7FAFD / #FBF8F3).
  */
 export const GalleryDynamicBackdrop: React.FC<GalleryDynamicBackdropProps> = ({ src }) => {
-  const [state, setState] = useState<{ current: string; previous: string | null }>({
-    current: src,
-    previous: null,
+  // Dua slot gambar permanen: satu aktif (visible), satu standby (hidden)
+  const [slots, setSlots] = useState<{
+    activeSlot: 0 | 1;
+    prevPropSrc: string;
+    slot0: string;
+    slot1: string;
+  }>({
+    activeSlot: 0,
+    prevPropSrc: src,
+    slot0: src,
+    slot1: src,
   });
 
-  // Pola resmi React untuk menyesuaikan state saat prop berubah tanpa cascading effect
-  if (state.current !== src) {
-    setState({
-      current: src,
-      previous: state.current,
-    });
-  }
-
-  // Bersihkan layer sebelumnya setelah transisi selesai
-  useEffect(() => {
-    if (state.previous) {
-      const timer = setTimeout(() => {
-        setState((s) => ({ ...s, previous: null }));
-      }, 700);
-      return () => clearTimeout(timer);
+  // Pola resmi React: sesuaikan state langsung saat prop berubah tanpa effect cascading
+  if (src !== slots.prevPropSrc) {
+    if (slots.activeSlot === 0) {
+      setSlots({
+        activeSlot: 1,
+        prevPropSrc: src,
+        slot0: slots.slot0,
+        slot1: src,
+      });
+    } else {
+      setSlots({
+        activeSlot: 0,
+        prevPropSrc: src,
+        slot0: src,
+        slot1: slots.slot1,
+      });
     }
-  }, [state.previous]);
+  }
 
   return (
     <div
       className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none"
       style={{
         maskImage:
-          'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.12) 2.5%, rgba(0,0,0,0.55) 5.5%, black 9%, black 91%, rgba(0,0,0,0.55) 94.5%, rgba(0,0,0,0.12) 97.5%, transparent 100%)',
+          'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.15) 3%, rgba(0,0,0,0.6) 6%, black 10%, black 90%, rgba(0,0,0,0.6) 94%, rgba(0,0,0,0.15) 97%, transparent 100%)',
         WebkitMaskImage:
-          'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.12) 2.5%, rgba(0,0,0,0.55) 5.5%, black 9%, black 91%, rgba(0,0,0,0.55) 94.5%, rgba(0,0,0,0.12) 97.5%, transparent 100%)',
+          'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.15) 3%, rgba(0,0,0,0.6) 6%, black 10%, black 90%, rgba(0,0,0,0.6) 94%, rgba(0,0,0,0.15) 97%, transparent 100%)',
       }}
       aria-hidden="true"
     >
-      {/* 1. LAYER FOTO SEBELUMNYA */}
-      {state.previous && (
-        <img
-          src={state.previous}
-          alt=""
-          decoding="async"
-          className="absolute inset-0 w-full h-full object-cover object-center filter blur-[2px] scale-105 opacity-0 transition-opacity duration-700 ease-out"
-          style={{
-            maskImage:
-              'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.18) 1.5%, rgba(0,0,0,0.7) 3.5%, black 6%, black 94%, rgba(0,0,0,0.7) 96.5%, rgba(0,0,0,0.18) 98.5%, transparent 100%)',
-            WebkitMaskImage:
-              'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.18) 1.5%, rgba(0,0,0,0.7) 3.5%, black 6%, black 94%, rgba(0,0,0,0.7) 96.5%, rgba(0,0,0,0.18) 98.5%, transparent 100%)',
-          }}
-        />
-      )}
-
-      {/* 2. LAYER FOTO AKTIF (JELAS, VIBRANT, DAN MENAWAN DENGAN KURVA ELEGAN) */}
+      {/* SLOT 0 LAYER */}
       <img
-        key={state.current}
-        src={state.current}
+        src={slots.slot0}
         alt=""
         decoding="async"
-        className="absolute inset-0 w-full h-full object-cover object-center filter blur-[1px] scale-102 opacity-55 sm:opacity-65 transition-opacity duration-700 ease-out"
+        className={`absolute inset-0 w-full h-full object-cover object-center filter blur-[1.5px] scale-102 pointer-events-none transition-opacity duration-600 ease-in-out ${
+          slots.activeSlot === 0 ? 'opacity-55 sm:opacity-65' : 'opacity-0'
+        }`}
         style={{
           maskImage:
-            'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.18) 1.5%, rgba(0,0,0,0.7) 3.5%, black 6%, black 94%, rgba(0,0,0,0.7) 96.5%, rgba(0,0,0,0.18) 98.5%, transparent 100%)',
+            'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.2) 2%, rgba(0,0,0,0.7) 4%, black 7%, black 93%, rgba(0,0,0,0.7) 96%, rgba(0,0,0,0.2) 98%, transparent 100%)',
           WebkitMaskImage:
-            'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.18) 1.5%, rgba(0,0,0,0.7) 3.5%, black 6%, black 94%, rgba(0,0,0,0.7) 96.5%, rgba(0,0,0,0.18) 98.5%, transparent 100%)',
+            'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.2) 2%, rgba(0,0,0,0.7) 4%, black 7%, black 93%, rgba(0,0,0,0.7) 96%, rgba(0,0,0,0.2) 98%, transparent 100%)',
+          willChange: 'opacity',
         }}
       />
 
-      {/* 3. GRADASI PINGGIRAN TIPIS: MELEBUR HALUS DI PERIMETER TANPA MEMOTONG FOTO */}
+      {/* SLOT 1 LAYER */}
+      <img
+        src={slots.slot1}
+        alt=""
+        decoding="async"
+        className={`absolute inset-0 w-full h-full object-cover object-center filter blur-[1.5px] scale-102 pointer-events-none transition-opacity duration-600 ease-in-out ${
+          slots.activeSlot === 1 ? 'opacity-55 sm:opacity-65' : 'opacity-0'
+        }`}
+        style={{
+          maskImage:
+            'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.2) 2%, rgba(0,0,0,0.7) 4%, black 7%, black 93%, rgba(0,0,0,0.7) 96%, rgba(0,0,0,0.2) 98%, transparent 100%)',
+          WebkitMaskImage:
+            'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.2) 2%, rgba(0,0,0,0.7) 4%, black 7%, black 93%, rgba(0,0,0,0.7) 96%, rgba(0,0,0,0.2) 98%, transparent 100%)',
+          willChange: 'opacity',
+        }}
+      />
+
+      {/* GRADASI PINGGIRAN TIPIS: MELEBUR HALUS DI PERIMETER TANPA MEMOTONG FOTO */}
       <div className="absolute inset-x-0 top-0 h-20 sm:h-24 bg-gradient-to-b from-bg-main via-bg-main/50 to-transparent pointer-events-none z-10" />
       <div className="absolute inset-x-0 bottom-0 h-20 sm:h-24 bg-gradient-to-t from-bg-main via-bg-main/50 to-transparent pointer-events-none z-10" />
       <div className="absolute inset-y-0 left-0 w-6 sm:w-8 bg-gradient-to-r from-bg-main via-bg-main/40 to-transparent pointer-events-none z-10" />

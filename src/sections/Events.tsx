@@ -100,6 +100,15 @@ export const Events: React.FC = () => {
                           </p>
                         </div>
                       </div>
+
+                      {/* Catatan Khusus Acara (Bila Ada) */}
+                      {evt.note && (
+                        <div className="pt-2 border-t border-line/60">
+                          <p className="text-[11.5px] sm:text-xs text-ink-muted italic bg-surface-alt/70 p-2.5 rounded-xs border-l-2 border-gold leading-relaxed font-light">
+                            {evt.note}
+                          </p>
+                        </div>
+                      )}
                     </div>
                   </div>
 
