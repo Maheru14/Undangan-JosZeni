@@ -44,10 +44,12 @@ batak-package/
 # Guest lists & spreadsheets (keep private, never push or deploy)
 *.xlsx
 *.xls
+*.xlsb
 *.xlsm
 *.xltx
 *.csv
 ~$*.xlsx
 ~$*.xls
+~$*.xlsb
 
 
