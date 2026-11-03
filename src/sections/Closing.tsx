@@ -62,7 +62,7 @@ export const Closing: React.FC = () => {
           <>
             <div className="w-20 h-[1px] bg-gold/40 mb-5" aria-hidden="true" />
             <Reveal direction="up" distance={20} delay={0.25}>
-              <p className="font-body text-xs tracking-[0.2em] text-gorga uppercase font-medium">
+              <p className="font-body text-xs tracking-[0.2em] text-gorga font-medium">
                 {config.hashtag}
               </p>
             </Reveal>

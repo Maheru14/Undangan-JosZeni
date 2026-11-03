@@ -258,7 +258,7 @@ export const weddingConfig: WeddingConfig = {
     src: '/audio/bgm-jacob-lee.m4a',
     title: 'Jacob Lee - I Belong to You',
   },
-  hashtag: '',
+  hashtag: '#YoZeBegins ❤️',
   greeting: {
     traditional: '',
     opening: 'Salam Damai Sejahtera Dalam Kasih Tuhan Yesus Kristus',
