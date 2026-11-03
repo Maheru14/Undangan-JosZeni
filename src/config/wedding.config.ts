@@ -136,11 +136,11 @@ export const weddingConfig: WeddingConfig = {
       name: 'Pesta Adat Batak & Jamuan Makan',
       date: 'Sabtu, 28 November 2026',
       isoDate: '2026-11-28T11:00:00+07:00',
-      time: 'Setelah Acara Pemberkatan s/d Selesai',
+      time: '11:00 WIB s/d Selesai',
       venueName: 'Lapangan Futsal Jayaloka (Belakang Koramil)',
       address: 'Lingkungan Jayaloka 1 RT 03 RW 01 Jayaloka, Kec. Tebing-Tinggi, Kab. Empat Lawang',
       mapsUrl: 'https://maps.app.goo.gl/HU8Cm4WgkS247CUU9?g_st=iw',
-      note: 'Setelah selesai acara pemberkatan Nikah dari Gereja, kami mengharapkan kehadiran Bapak/Ibu/Saudara/i untuk mengikuti jamuan makan serta mengikuti acara adat.',
+      note: 'Setelah selesai acara Pemberkatan Nikah di Gereja (pukul 08:00 WIB), rangkaian acara dilanjutkan dengan:\n• 11:00 WIB : Jamuan Makan Siang Bersama\n• 11:30 WIB : Rangkaian Acara Adat s/d Selesai',
     },
   ],
   countdown: {
