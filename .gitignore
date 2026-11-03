@@ -41,3 +41,13 @@ public/Screenshot*
 .playwright-mcp/
 batak-package/
 
+# Guest lists & spreadsheets (keep private, never push or deploy)
+*.xlsx
+*.xls
+*.xlsm
+*.xltx
+*.csv
+~$*.xlsx
+~$*.xls
+
+
