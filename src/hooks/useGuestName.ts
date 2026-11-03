@@ -14,25 +14,12 @@ function parseGuestName(): string {
     // Decode URI component secara aman
     const decoded = decodeURIComponent(rawParam.replace(/\+/g, ' ')).trim();
 
-    // Sanitasi karakter tag HTML untuk mencegah injeksi XSS
+    // Hapus karakter tak kasat mata (seperti format WhatsApp \u200e) & tag HTML/kurung siku
     const sanitized = decoded
+      .replace(/[\u200B-\u200D\u200E\u200F\uFEFF]/g, '')
       .replace(/<[^>]*>/g, '')
-      .replace(/[<>"'&]/g, (match) => {
-        switch (match) {
-          case '<':
-            return '&lt;';
-          case '>':
-            return '&gt;';
-          case '"':
-            return '&quot;';
-          case "'":
-            return '&#39;';
-          case '&':
-            return '&amp;';
-          default:
-            return match;
-        }
-      })
+      .replace(/[<>]/g, '')
+      .replace(/\s+/g, ' ')
       .trim();
 
     return sanitized || 'Tamu Undangan';
