@@ -51,5 +51,8 @@ batak-package/
 ~$*.xlsx
 ~$*.xls
 ~$*.xlsb
+list undangan/
+public/list undangan/
+*list undangan*
 
 
