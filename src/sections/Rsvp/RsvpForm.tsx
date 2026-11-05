@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Send, CheckCircle2, User, MessageSquare, ShieldAlert, RotateCw, Globe, Check } from 'lucide-react';
+import { Send, CheckCircle2, User, MessageSquare } from 'lucide-react';
 import { useAppContext } from '../../context/AppContext';
 import { rsvpStorage, type AttendanceStatus, type RsvpEntry } from '../../lib/storageAdapter';
 import { CornerOrnament } from '../../components/decor/CornerOrnament';
@@ -10,37 +10,17 @@ interface RsvpFormProps {
 }
 
 export const RsvpForm: React.FC<RsvpFormProps> = ({ onSuccess }) => {
-  const { guestName, guestStatus, guestQuota, isRsvpAllowed, refreshGuestList } = useAppContext();
+  const { guestName } = useAppContext();
 
-  // Otomatis terisi nama sesuai undangan resmi, namun tamu tetap bebas mengedit jika diperlukan
+  // Nama otomatis terisi jika ada nama di link (?to=...), tapi tamu bebas mengubahnya
   const [editedName, setEditedName] = useState<string | null>(null);
   const name = editedName !== null ? editedName : (guestName !== 'Tamu Undangan' ? guestName : '');
 
   const [attendance, setAttendance] = useState<AttendanceStatus>('hadir');
   const [message, setMessage] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const [isCheckingLive, setIsCheckingLive] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string>('');
   const [isSuccessFeedback, setIsSuccessFeedback] = useState<boolean>(false);
-
-  const handleManualRefresh = async () => {
-    setIsCheckingLive(true);
-    setErrorMsg('');
-    try {
-      await refreshGuestList();
-    } catch {
-      setErrorMsg('Gagal memperbarui data dari Google Sheets. Silakan periksa koneksi internet Anda.');
-    } finally {
-      setIsCheckingLive(false);
-    }
-  };
-
-  const handleGoToGeneral = () => {
-    if (typeof window !== 'undefined') {
-      // Buka domain utama tanpa query parameter
-      window.location.href = window.location.pathname;
-    }
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -62,7 +42,7 @@ export const RsvpForm: React.FC<RsvpFormProps> = ({ onSuccess }) => {
       const saved = await rsvpStorage.save({
         name: name.trim(),
         attendance,
-        guestCount: attendance === 'hadir' ? (guestQuota || 1) : 0,
+        guestCount: attendance === 'hadir' ? 1 : 0,
         message: message.trim(),
       });
 
@@ -80,64 +60,6 @@ export const RsvpForm: React.FC<RsvpFormProps> = ({ onSuccess }) => {
     }
   };
 
-  // KONDISI KHUSUS: Tautan dengan nama yang diedit dan TIDAK TERDAFTAR di Google Sheets
-  if (!isRsvpAllowed) {
-    return (
-      <div className="relative p-6 sm:p-8 rounded-xs bg-surface border border-gorga/40 shadow-md text-left overflow-hidden">
-        {/* Ornamen Sudut Gorga */}
-        <CornerOrnament size={24} opacity={0.6} variant="gorga" />
-        <GorgaWatermark variant="light" opacity={0.02} />
-
-        <div className="relative z-10 flex flex-col items-center text-center py-4">
-          <div className="w-12 h-12 rounded-full bg-gorga/10 border border-gorga/30 flex items-center justify-center text-gorga mb-3">
-            <ShieldAlert className="w-6 h-6 stroke-[1.75]" />
-          </div>
-
-          <h3 className="font-display text-lg sm:text-xl text-ink font-semibold mb-2">
-            Tautan Undangan Tidak Terdaftar
-          </h3>
-
-          <p className="font-body text-xs sm:text-sm text-ink-muted leading-relaxed max-w-md mb-4 font-light">
-            Nama pada tautan ini tidak tercantum di dalam buku tamu resmi kami. Demi menjaga ketertiban data dan kuota kehadiran, pengisian formulir konfirmasi RSVP dinonaktifkan untuk tautan ini.
-          </p>
-
-          <div className="p-3 mb-5 max-w-sm rounded-xs bg-surface-alt border border-gold/30 text-2xs text-ink/80 text-left space-y-1">
-            <p className="font-semibold text-ink">Catatan:</p>
-            <p>• Bagi tamu umum / keluarga, Anda dapat membuka <strong>undangan utama</strong> untuk dapat mengisi ucapan &amp; konfirmasi.</p>
-            <p>• Jika nama Anda baru saja ditambahkan oleh pengantin, silakan klik tombol <em>Periksa Ulang</em> di bawah.</p>
-          </div>
-
-          {errorMsg && (
-            <div className="mb-4 p-2.5 rounded-xs bg-red-100 border border-red-300 text-red-800 text-xs font-body w-full max-w-sm">
-              {errorMsg}
-            </div>
-          )}
-
-          <div className="flex flex-wrap items-center justify-center gap-2.5">
-            <button
-              type="button"
-              onClick={handleGoToGeneral}
-              className="inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-body font-semibold tracking-wider uppercase rounded-xs bg-gorga text-white hover:bg-gorga-bright transition-colors shadow-xs cursor-pointer active:scale-98"
-            >
-              <Globe className="w-3.5 h-3.5" />
-              <span>Buka Undangan Umum</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={handleManualRefresh}
-              disabled={isCheckingLive}
-              className="inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-body font-medium tracking-wider uppercase rounded-xs border border-gold/60 bg-surface text-ink hover:border-gold-bright transition-colors shadow-xs cursor-pointer active:scale-98 disabled:opacity-50"
-            >
-              <RotateCw className={`w-3.5 h-3.5 text-gold-dark ${isCheckingLive ? 'animate-spin' : ''}`} />
-              <span>{isCheckingLive ? 'Memeriksa...' : 'Periksa Ulang'}</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <form
       onSubmit={handleSubmit}
@@ -150,22 +72,11 @@ export const RsvpForm: React.FC<RsvpFormProps> = ({ onSuccess }) => {
       <GorgaWatermark variant="light" opacity={0.02} />
 
       <div className="relative z-10">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-1">
-          <h3 className="font-display text-xl sm:text-2xl text-ink font-semibold tracking-wide">
-            Konfirmasi Kehadiran
-          </h3>
-          {guestStatus === 'verified' && (
-            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300 w-fit">
-              <Check className="w-3 h-3 stroke-[2.5]" />
-              Tamu Terdaftar Resmi
-            </span>
-          )}
-        </div>
-
+        <h3 className="font-display text-xl sm:text-2xl text-ink font-semibold tracking-wide mb-1">
+          Konfirmasi Kehadiran
+        </h3>
         <p className="font-body text-xs sm:text-sm text-ink-muted mb-6 font-light">
-          {guestStatus === 'verified'
-            ? `Undangan berlaku untuk ${guestQuota} orang. Mohon konfirmasi kehadiran Anda demi kelancaran jamuan adat.`
-            : 'Mohon mengisi formulir di bawah ini untuk membantu kami mempersiapkan jamuan pesta.'}
+          Mohon mengisi formulir di bawah ini untuk membantu kami mempersiapkan jamuan pesta.
         </p>
 
         {errorMsg && (
@@ -188,7 +99,7 @@ export const RsvpForm: React.FC<RsvpFormProps> = ({ onSuccess }) => {
               <label htmlFor="rsvp-name" className="block text-xs uppercase tracking-wider text-ink font-medium">
                 Nama Lengkap <span className="text-gorga">*</span>
               </label>
-              {guestStatus === 'verified' && (
+              {guestName !== 'Tamu Undangan' && (
                 <span className="text-[10px] text-ink-muted/80 italic">
                   (Dapat disesuaikan bila perlu)
                 </span>
