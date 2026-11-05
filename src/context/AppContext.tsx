@@ -1,12 +1,18 @@
 import React, { createContext, useContext, useState, useCallback, useMemo } from 'react';
 import { weddingConfig, type WeddingConfig } from '../config/wedding.config';
-import { useGuestName } from '../hooks/useGuestName';
+import { useGuestValidation } from '../hooks/useGuestValidation';
 import { useAudio, type UseAudioReturn } from '../hooks/useAudio';
+import type { GuestValidationStatus } from '../types/guest';
 
 export interface AppContextType {
   isOpened: boolean;
   openInvitation: () => Promise<void>;
   guestName: string;
+  guestStatus: GuestValidationStatus;
+  guestQuota: number;
+  isRsvpAllowed: boolean;
+  guestCategory?: string;
+  refreshGuestList: () => Promise<void>;
   audio: UseAudioReturn;
   config: WeddingConfig;
 }
@@ -21,7 +27,8 @@ export function AppContextProvider({ children }: { children: React.ReactNode }) 
     }
     return false;
   });
-  const guestName = useGuestName();
+
+  const guestValidation = useGuestValidation();
   const audio = useAudio(weddingConfig.audio.src);
 
   const openInvitation = useCallback(async () => {
@@ -34,11 +41,16 @@ export function AppContextProvider({ children }: { children: React.ReactNode }) 
     () => ({
       isOpened,
       openInvitation,
-      guestName,
+      guestName: guestValidation.name,
+      guestStatus: guestValidation.status,
+      guestQuota: guestValidation.quota,
+      isRsvpAllowed: guestValidation.isRsvpAllowed,
+      guestCategory: guestValidation.category,
+      refreshGuestList: guestValidation.refreshLiveList,
       audio,
       config: weddingConfig,
     }),
-    [isOpened, openInvitation, guestName, audio],
+    [isOpened, openInvitation, guestValidation, audio],
   );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

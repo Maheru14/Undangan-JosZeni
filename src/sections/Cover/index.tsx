@@ -8,7 +8,7 @@ import { FloralAccent } from '../../components/decor/FloralAccent';
 import { HangingFloral } from '../../components/decor/HangingFloral';
 
 export const Cover: React.FC = () => {
-  const { config, guestName, openInvitation, isOpened } = useAppContext();
+  const { config, guestName, guestStatus, guestQuota, openInvitation, isOpened } = useAppContext();
   const [isOpening, setIsOpening] = useState<boolean>(false);
   const [isRemoved, setIsRemoved] = useState<boolean>(false);
 
@@ -206,6 +206,12 @@ export const Cover: React.FC = () => {
               <h2 className="font-display text-base sm:text-lg md:text-xl text-ink font-bold tracking-wide break-words max-w-full my-0.5 drop-shadow-xs">
                 {guestName}
               </h2>
+
+              {guestStatus === 'verified' && guestQuota > 1 && (
+                <span className="inline-block my-0.5 px-2 py-0.5 rounded-full text-[9px] font-medium bg-gold/15 text-gold-dark border border-gold/30">
+                  Undangan untuk {guestQuota} Orang
+                </span>
+              )}
 
               <p className="font-body text-[10px] sm:text-[10.5px] text-gold-text font-semibold tracking-wider uppercase mt-0.5">
                 di Tempat
