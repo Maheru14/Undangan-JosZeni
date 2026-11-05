@@ -2770,5 +2770,11 @@
     "slug": "Loemongga",
     "quota": 1,
     "category": "JOGJA"
+  },
+  {
+    "name": "Ananda Panjaitan",
+    "slug": "Ananda Panjaitan",
+    "quota": 1,
+    "category": "Other"
   }
 ]
