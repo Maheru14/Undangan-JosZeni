@@ -12,13 +12,9 @@ interface RsvpFormProps {
 export const RsvpForm: React.FC<RsvpFormProps> = ({ onSuccess }) => {
   const { guestName, guestStatus, guestQuota, isRsvpAllowed, refreshGuestList } = useAppContext();
 
-  // Jika tamu terverifikasi, gunakan nama resmi dari daftar; jika general, gunakan input manual
-  const [manualName, setManualName] = useState<string>(() => {
-    if (guestStatus === 'verified') return '';
-    return guestName !== 'Tamu Undangan' ? guestName : '';
-  });
-
-  const name = guestStatus === 'verified' ? guestName : manualName;
+  // Otomatis terisi nama sesuai undangan resmi, namun tamu tetap bebas mengedit jika diperlukan
+  const [editedName, setEditedName] = useState<string | null>(null);
+  const name = editedName !== null ? editedName : (guestName !== 'Tamu Undangan' ? guestName : '');
 
   const [attendance, setAttendance] = useState<AttendanceStatus>('hadir');
   const [message, setMessage] = useState<string>('');
@@ -193,8 +189,8 @@ export const RsvpForm: React.FC<RsvpFormProps> = ({ onSuccess }) => {
                 Nama Lengkap <span className="text-gorga">*</span>
               </label>
               {guestStatus === 'verified' && (
-                <span className="text-[10px] text-ink-muted italic">
-                  (Terkunci sesuai daftar undangan)
+                <span className="text-[10px] text-ink-muted/80 italic">
+                  (Dapat disesuaikan bila perlu)
                 </span>
               )}
             </div>
@@ -204,18 +200,9 @@ export const RsvpForm: React.FC<RsvpFormProps> = ({ onSuccess }) => {
                 type="text"
                 required
                 value={name}
-                readOnly={guestStatus === 'verified'}
-                onChange={(e) => {
-                  if (guestStatus !== 'verified') {
-                    setManualName(e.target.value);
-                  }
-                }}
-                placeholder={guestStatus === 'verified' ? guestName : 'Nama Lengkap Anda'}
-                className={`w-full px-4 py-3 pl-10 text-sm rounded-xs border transition-colors ${
-                  guestStatus === 'verified'
-                    ? 'border-gold/60 bg-surface-alt/70 text-ink font-medium cursor-default focus:outline-none'
-                    : 'border-gold/40 bg-surface text-ink placeholder:text-ink/40 focus:border-gorga focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gorga'
-                }`}
+                onChange={(e) => setEditedName(e.target.value)}
+                placeholder="Nama Lengkap Anda"
+                className="w-full px-4 py-3 pl-10 text-sm rounded-xs border border-gold/40 bg-surface text-ink placeholder:text-ink/40 focus:border-gorga focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gorga transition-colors"
               />
               <User className="w-4 h-4 text-gorga absolute left-3.5 top-1/2 -translate-y-1/2 stroke-[1.5]" />
             </div>
