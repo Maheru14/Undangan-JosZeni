@@ -57,7 +57,7 @@ export const Couple: React.FC = () => {
 
         {/* EDITORIAL ASYMMETRIC DUO (SALING TATAP / DIPPING OVERLAP) */}
         <div className="space-y-6 sm:space-y-8 mt-6">
-          {/* MEMPELAI PRIA (DANIEL) — OFFSET KIRI */}
+          {/* MEMPELAI PRIA (YOSUA) — OFFSET KIRI */}
           <Reveal direction="left" distance={40} duration={0.85}>
             <div className="w-full flex flex-col items-start text-left pl-2 sm:pl-4 max-w-sm sm:max-w-md mr-auto">
               <CouplePortrait
@@ -129,7 +129,7 @@ export const Couple: React.FC = () => {
             </div>
           </Reveal>
 
-          {/* MEMPELAI WANITA (RUTH) — OFFSET KANAN */}
+          {/* MEMPELAI WANITA (ZENI) — OFFSET KANAN */}
           <Reveal direction="right" distance={40} duration={0.85}>
             <div className="w-full flex flex-col items-end text-right pr-2 sm:pr-4 max-w-sm sm:max-w-md ml-auto">
               <CouplePortrait

@@ -85,7 +85,7 @@ function MainLayout() {
               {/* SECTION 2: PROFIL KEDUA MEMPELAI */}
               <Couple />
 
-              {/* SECTION 3: RANGKAIAN ACARA (MARTUMPOL, PEMBERKATAN HKBP, PESTA ADAT NA GOK) */}
+              {/* SECTION 3: RANGKAIAN ACARA (PEMBERKATAN NIKAH & PESTA ADAT BATAK) */}
               <Events />
 
               {/* SECTION 4: AYAT FIRMAN TUHAN & JANJI SUCI */}

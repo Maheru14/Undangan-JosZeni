@@ -57,18 +57,16 @@ function cleanupLegacyStorage() {
 cleanupLegacyStorage();
 
 /**
- * Filter keamanan ekstra untuk memastikan ucapan dami tidak pernah muncul
+ * Filter keamanan ekstra untuk memastikan ucapan dami lama tidak pernah muncul
  */
 function isDummyEntry(item: RsvpEntry): boolean {
   if (!item || item.isDummy) return true;
-  const name = (item.name || '').toLowerCase();
-  const msg = (item.message || '').toLowerCase();
+  const name = (item.name || '').toLowerCase().trim();
+  const msg = (item.message || '').toLowerCase().trim();
   return (
-    name.includes('simanjuntak') ||
-    name.includes('siregar') ||
-    name.includes('silalahi') ||
     msg.includes('daniel & ruth') ||
-    msg.includes('horas ma di hamu')
+    name === 'contoh nama' ||
+    name === 'dummy user'
   );
 }
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CreditCard, Gift as GiftIcon, Copy } from 'lucide-react';
+import { CreditCard, Gift as GiftIcon, Copy, ExternalLink } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
 import { Divider } from '../components/decor/Divider';
 import { GorgaWatermark } from '../components/decor/GorgaWatermark';
@@ -138,22 +138,35 @@ export const Gift: React.FC = () => {
                     )}
                   </div>
 
-                  {/* Tombol Salin */}
-                  <div className="pt-4 mt-4 border-t border-line/60 relative z-10">
+                  {/* Tombol Salin & Google Maps */}
+                  <div className="pt-4 mt-4 border-t border-line/60 relative z-10 flex flex-col sm:flex-row gap-2.5">
                     {item.accountNumber !== '-' ? (
                       <button
                         type="button"
                         onClick={() => handleCopy(item.accountNumber, item.provider)}
                         aria-label={`Salin ${item.provider}`}
-                        className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xs border border-gold text-gorga bg-surface-alt hover:bg-gorga hover:text-white active:bg-gorga active:text-white active:scale-98 transition-colors duration-200 text-xs font-body font-semibold tracking-wider min-h-[44px] cursor-pointer shadow-xs"
+                        className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xs border border-gold text-gorga bg-surface-alt hover:bg-gorga hover:text-white active:bg-gorga active:text-white active:scale-98 transition-colors duration-200 text-xs font-body font-semibold tracking-wider min-h-[44px] cursor-pointer shadow-xs"
                       >
                         <Copy className="w-3.5 h-3.5 stroke-[1.5]" />
                         <span>{isAddress ? 'Salin Alamat' : 'Salin Nomor Rekening'}</span>
                       </button>
                     ) : (
-                      <div className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xs border border-gold/30 text-ink-muted/70 bg-surface-alt/50 text-xs font-body font-medium tracking-wider min-h-[44px]">
+                      <div className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xs border border-gold/30 text-ink-muted/70 bg-surface-alt/50 text-xs font-body font-medium tracking-wider min-h-[44px]">
                         <span>Informasi Alamat Segera Hadir</span>
                       </div>
+                    )}
+
+                    {isAddress && item.mapsUrl && (
+                      <a
+                        href={item.mapsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Buka lokasi pengiriman di Google Maps"
+                        className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xs border border-gold bg-gorga text-white hover:bg-gorga-bright active:bg-gorga active:scale-98 transition-colors duration-200 text-xs font-body font-semibold tracking-wider min-h-[44px] shadow-xs cursor-pointer"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5 stroke-[1.5]" />
+                        <span>Buka Google Maps</span>
+                      </a>
                     )}
                   </div>
                 </div>

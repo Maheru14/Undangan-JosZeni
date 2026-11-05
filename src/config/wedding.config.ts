@@ -43,6 +43,7 @@ export interface GiftItem {
   accountNumber: string;
   accountHolder: string;
   note?: string;
+  mapsUrl?: string;
 }
 
 export interface WeddingConfig {
@@ -249,9 +250,10 @@ export const weddingConfig: WeddingConfig = {
     {
       type: 'address',
       provider: 'Alamat Pengiriman Kado Fisik',
-      accountNumber: '-',
+      accountNumber: 'Lingkungan Jayaloka 1, RT. 003 / RW. 001 (Rumah depan lapangan futsal), Kelurahan Jayaloka, Kecamatan Tebing Tinggi, Kabupaten Empat Lawang, Sumatera Selatan',
       accountHolder: 'Ricky Yosua Panjaitan & Zeni Evita R.',
-      note: 'Informasi alamat pengiriman fisik akan segera diperbarui',
+      mapsUrl: 'https://maps.app.goo.gl/3CVe6wuXLDHvFkdH8',
+      note: 'Konfirmasi pengiriman kado dapat menghubungi kedua mempelai',
     },
   ],
   audio: {
